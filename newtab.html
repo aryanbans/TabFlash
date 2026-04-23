@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabFlash</title>
+  <link rel="stylesheet" href="newtab.css">
+</head>
+
+<body>
+  <!-- Stats: fixed top-right with tooltip -->
+  <div id="statsCorner">
+    <span class="stats-tooltip-wrapper"
+      data-tooltip="Due: cards ready for review. Learned: cards that have reached Review state.">
+      <span id="statsText" aria-live="polite">Due: 0 | Learned: 0</span>
+    </span>
+  </div>
+
+  <!-- Card zone: hover area covering card + arc buttons below -->
+  <div class="card-container" id="mainContainer" style="visibility: hidden;">
+    <div id="cardZone">
+      <div class="card" id="card">
+        <div class="card-front" id="cardFront">Loading...</div>
+        <div class="card-back" id="cardBack"></div>
+      </div>
+      <div id="arcButtons">
+        <button id="btn1" class="arc-btn btn-red" aria-label="Quality 1"></button>
+        <button id="btn2" class="arc-btn btn-orange" aria-label="Quality 2"></button>
+        <button id="btn3" class="arc-btn btn-yellow" aria-label="Quality 3"></button>
+        <button id="btn4" class="arc-btn btn-green" aria-label="Quality 4"></button>
+      </div>
+    </div>
+
+    <!-- All Done Container (Hidden by default) -->
+    <div id="allDoneContainer">
+      <div id="countdownTimer" class="countdown"></div>
+      <div id="shortcuts-container" class="shortcuts-grid"></div>
+    </div>
+
+    <!-- Hidden clickable button in the top left to force next cycle -->
+    <button id="forceReviewBtn" aria-label="Force early review">Cram Mode</button>
+  </div>
+
+  <!-- Keyboard hint: revealed on hover over bottom zone -->
+  <div id="bottomHoverZone">
+    <span class="keyboard-hint" aria-hidden="true">
+      Space = Flip &nbsp;·&nbsp; 1 / Left = Again &nbsp;·&nbsp; 2 = Hard &nbsp;·&nbsp; 3 = Good &nbsp;·&nbsp; 4 / Right
+      = Easy
+    </span>
+  </div>
+
+  <script src="newtab.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,379 @@
+/* newtab.css */
+:root {
+  --bg: #0d1117;
+  --card-bg: #f0ece4;
+  --card-text: #1c1a17;
+  --hint-color: rgba(160, 174, 210, 0.45);
+  --stats-color: rgba(180, 190, 220, 0.75);
+  
+  --color-red: #d73a49;
+  --color-orange: #f66a0a;
+  --color-yellow: #e3b341;
+  --color-green: #2ea043;
+  
+  --ui-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --card-font: Georgia, 'Times New Roman', serif;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  font-family: var(--ui-font);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ─── Stats Corner ───────────────────────────────────────── */
+#statsCorner {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  text-align: right;
+  z-index: 100;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--stats-color);
+  font-family: var(--ui-font);
+}
+
+.stats-tooltip-wrapper {
+  position: relative;
+  cursor: help;
+}
+
+.stats-tooltip-wrapper::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  width: max-content;
+  max-width: 260px;
+  background: rgba(20, 24, 40, 0.95);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  white-space: normal;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.stats-tooltip-wrapper:hover::after {
+  opacity: 1;
+}
+
+/* ─── Card Container ─────────────────────────────────────── */
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  perspective: 1000px;
+}
+
+/* ─── Card Zone ──────────────────────────────────────────── */
+#cardZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+/* ─── All Done State ─────────────────────────────────────── */
+#allDoneContainer {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.countdown {
+  color: var(--card-bg);
+  font-family: var(--card-font);
+  font-size: 3.2rem;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.shortcuts-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 150px;
+  z-index: 5;
+}
+
+.shortcut-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 72px;
+  padding: 10px;
+  text-decoration: none;
+  color: var(--hint-color);
+  border-radius: 12px;
+  font-family: var(--ui-font);
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.shortcut-tile:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.shortcut-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px;
+}
+
+.shortcut-title {
+  font-size: 0.75rem;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.02em;
+}
+
+#forceReviewBtn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  font-family: var(--ui-font);
+  font-size: 0.8rem;
+  color: var(--hint-color);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 100;
+  display: none; /* Only show when deck complete */
+}
+
+body.deck-complete #forceReviewBtn {
+  display: block;
+}
+
+#forceReviewBtn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.deck-complete #cardZone {
+  display: none;
+}
+
+body.deck-complete #allDoneContainer {
+  display: flex;
+}
+
+body.just-completed {
+  animation: flashBgComplete 0.7s ease;
+}
+
+/* ─── Card ───────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 600px;
+  max-width: 90vw;
+  min-height: 300px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.24s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  box-sizing: border-box;
+  font-size: 1.45rem;
+  line-height: 1.55;
+  text-align: center;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  font-family: var(--card-font);
+  border-radius: 20px;
+  /* No shadow */
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Rating Button Colors */
+.btn-red { background-color: var(--color-red); box-shadow: 0 4px 15px rgba(215, 58, 73, 0.3); }
+.btn-orange { background-color: var(--color-orange); box-shadow: 0 4px 15px rgba(246, 106, 10, 0.3); }
+.btn-yellow { background-color: var(--color-yellow); box-shadow: 0 4px 15px rgba(227, 179, 65, 0.3); }
+.btn-green { background-color: var(--color-green); box-shadow: 0 4px 15px rgba(46, 160, 67, 0.3); }
+
+/* ─── Hover Hints ────────────────────────────────────────── */
+#arcButtons {
+  position: relative;
+  width: 100%;
+  height: 150px; /* Further enlarged grace area for secondary clearance */
+  z-index: 5;
+  pointer-events: none;
+}
+
+.arc-btn {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-family: var(--ui-font);
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  transform: translateX(-50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  /* Synced with card flip at 0.24s */
+  transition:
+    transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.18s ease,
+    filter 0.15s ease;
+}
+
+#arcButtons.arc-visible .arc-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#arcButtons.arc-visible #btn1 {
+  transform: translate(calc(-50% - 145px), 25px) scale(1);
+}
+
+#arcButtons.arc-visible #btn2 {
+  transform: translate(calc(-50% - 50px), 52px) scale(1);
+}
+
+#arcButtons.arc-visible #btn3 {
+  transform: translate(calc(-50% + 50px), 52px) scale(1);
+}
+
+#arcButtons.arc-visible #btn4 {
+  transform: translate(calc(-50% + 145px), 25px) scale(1);
+}
+
+body.cram-mode #btn2,
+body.cram-mode #btn3 {
+  display: none !important;
+}
+
+body.cram-mode #arcButtons.arc-visible #btn1 {
+  transform: translate(calc(-50% - 60px), 25px) scale(1);
+}
+
+body.cram-mode #arcButtons.arc-visible #btn4 {
+  transform: translate(calc(-50% + 60px), 25px) scale(1);
+}
+
+.arc-btn:hover:not(:disabled) {
+  filter: brightness(1.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+}
+
+.arc-btn:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed;
+  pointer-events: none !important;
+}
+
+/* ─── Keyboard Hint ──────────────────────────────────────── */
+body.deck-complete #bottomHoverZone {
+  display: none !important;
+}
+
+#bottomHoverZone {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 18px;
+  box-sizing: border-box;
+  pointer-events: auto;
+  z-index: 50;
+  background: transparent;
+}
+
+.keyboard-hint {
+  font-family: var(--ui-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  font-weight: 300;
+  color: var(--hint-color);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#bottomHoverZone:hover .keyboard-hint {
+  opacity: 1;
+}
+
+/* ─── Glow Effects ───────────────────────────────────────── */
+.flash-1 .card-front, .flash-1 .card-back { --flash-color: rgba(215, 58, 73, 0.8); animation: flashGeneric 0.36s ease; }
+.flash-2 .card-front, .flash-2 .card-back { --flash-color: rgba(246, 106, 10, 0.8); animation: flashGeneric 0.36s ease; }
+.flash-3 .card-front, .flash-3 .card-back { --flash-color: rgba(227, 179, 65, 0.8); animation: flashGeneric 0.36s ease; }
+.flash-4 .card-front, .flash-4 .card-back { --flash-color: rgba(46, 160, 67, 0.8); animation: flashGeneric 0.36s ease; }
+
+@keyframes flashGeneric {
+  0%, 100% { box-shadow: 0 0 0px transparent; }
+  50% { box-shadow: 0 0 40px var(--flash-color); }
+}
+
+@keyframes flashBgComplete {
+  0%, 100% { background-color: var(--bg); }
+  25% { background-color: #0c2b18; }
+}

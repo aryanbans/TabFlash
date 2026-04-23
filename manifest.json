@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "TabFlash",
+  "version": "1.0",
+  "description": "Every new tab is a flashcard. Procrastination = studying.",
+  "permissions": [
+    "storage",
+    "topSites"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tabflash@yourname.local",
+      "strict_min_version": "109.0"
+    }
+  }
+}

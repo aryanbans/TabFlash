@@ -1,0 +1,64 @@
+{
+  "cards": [
+    {
+      "id": "1",
+      "front": "What does Goodhart's Law state?",
+      "back": "When a measure becomes a target, it ceases to be a good measure.",
+      "state": "New",
+      "difficulty": 0,
+      "stability": 0,
+      "reps": 0,
+      "lapses": 0,
+      "last_review": null,
+      "dueDate": null
+    },
+    {
+      "id": "2",
+      "front": "According to Ellul, what is 'technique'?",
+      "back": "The totality of methods rationally arrived at and having absolute efficiency in every field of human activity.",
+      "state": "New",
+      "difficulty": 0,
+      "stability": 0,
+      "reps": 0,
+      "lapses": 0,
+      "last_review": null,
+      "dueDate": null
+    },
+    {
+      "id": "3",
+      "front": "Who wrote 'The Humble Programmer' and what was his main argument?",
+      "back": "Edsger Dijkstra. He argued that programmers must approach their task with humility, respect the limitations of the human mind, and avoid clever tricks.",
+      "state": "New",
+      "difficulty": 0,
+      "stability": 0,
+      "reps": 0,
+      "lapses": 0,
+      "last_review": null,
+      "dueDate": null
+    },
+    {
+      "id": "4",
+      "front": "What is Knuth's 'literate programming'?",
+      "back": "A programming methodology where the primary goal is to explain to humans what a computer should do, treating programs as works of literature.",
+      "state": "New",
+      "difficulty": 0,
+      "stability": 0,
+      "reps": 0,
+      "lapses": 0,
+      "last_review": null,
+      "dueDate": null
+    },
+    {
+      "id": "5",
+      "front": "According to the Google Testing chapter, what is the recommended test pyramid ratio?",
+      "back": "80% small/unit tests, 15% medium/integration tests, 5% large/end-to-end tests.",
+      "state": "New",
+      "difficulty": 0,
+      "stability": 0,
+      "reps": 0,
+      "lapses": 0,
+      "last_review": null,
+      "dueDate": null
+    }
+  ]
+}
