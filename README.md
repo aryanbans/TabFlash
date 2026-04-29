@@ -2,6 +2,9 @@
 
 TabFlash is a Firefox extension that replaces the default new tab page with a flashcard interface. It utilizes a simplified, inference-only version of the FSRS-6 algorithm (Free Spaced Repetition Scheduler) to manage card scheduling, storing data persistently in browser local storage.
 
+> [!NOTE]
+> This extension may request the `topSites` permission (often described as browser history). This is used solely to display your top 8 most visited sites on the "Deck Complete" screen, providing a familiar experience similar to the default Firefox new tab page.
+
 ## Core Functionality
 
 - **FSRS-6 Algorithm Implementation:** Cards are scheduled based on the FSRS-6 spaced repetition formulas. Performance data (Stability, Difficulty, and State logic) is updated with each review to dictate learning step intervals and long-term retention.
@@ -13,7 +16,7 @@ TabFlash is a Firefox extension that replaces the default new tab page with a fl
 
 ## User Interface
 
-- **Deck Complete State:** When no cards are due, the interface displays a countdown timer indicating the time remaining until the next scheduled review.
+- **Deck Complete State:** When no cards are due, the interface displays a countdown timer indicating the time remaining until the next scheduled review. It also shows the user's top 8 sites, similarly to the default Firefox new tab.
 - **Cram Mode:** An optional feature allows users to review cards out-of-schedule. Hover over the top-left area during the Deck Complete state and click the "Cram Mode" button. Reviews conducted in Cram Mode do not penalize or alter FSRS scheduling parameters.
 - **Metrics Display:** A display in the top-right corner monitors active deck performance. It shows the number of cards `Due` and the number of cards that have successfully graduated to the `Review` status.
 - **Typography:** The interface utilizes serif fonts for card content (Georgia) and a system sans-serif stack for UI elements and metrics.
