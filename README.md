@@ -3,7 +3,7 @@
 TabFlash is a Firefox extension that replaces the default new tab page with a flashcard interface. It utilizes a simplified, inference-only version of the FSRS-6 algorithm (Free Spaced Repetition Scheduler) to manage card scheduling, storing data persistently in browser local storage.
 
 > [!NOTE]
-> This extension may request the `topSites` permission (often described as browser history). This is used solely to display your top 8 most visited sites on the "Deck Complete" screen, providing a familiar experience similar to the default Firefox new tab page.
+> This extension may request the `topSites` permission (often described as browser history). This is used solely to display your top 8 most visited sites on the "Deck Complete" screen, providing a familiar experience similar to the default Firefox new tab page. No information from this extension will ever leave your device.
 
 ## Core Functionality
 
