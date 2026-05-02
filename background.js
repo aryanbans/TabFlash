@@ -168,7 +168,7 @@ async function refreshCurrentCard(isCram = false) {
     await ensureDataFreshness();
     const card = await selectCard(isCram);
     if (card) {
-      await browser.storage.local.set({ currentCard: card });
+      await browser.storage.local.set({ currentCard: card, lastReset: Date.now() });
     }
     return card;
   } catch (error) {
@@ -208,7 +208,7 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
         const updatedCard = updateCard(cards[index], message.quality, message.isCram);
         cards[index] = updatedCard;
-        await browser.storage.local.set({ cards });
+        await browser.storage.local.set({ cards, lastReset: Date.now() });
         sendResponse({ success: true, card: updatedCard });
       } catch (error) {
         console.error('Error handling reviewCard:', error);
